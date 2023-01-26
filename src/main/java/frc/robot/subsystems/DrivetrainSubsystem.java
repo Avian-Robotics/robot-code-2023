@@ -27,6 +27,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
     leftSparkTwo = new CANSparkMax(Constants.LEFT_SPARK_TWO_PORT, MotorType.kBrushless);
     rightSparkOne = new CANSparkMax(Constants.RIGHT_SPARK_ONE_PORT, MotorType.kBrushless);
     rightSparkTwo = new CANSparkMax(Constants.RIGHT_SPARK_TWO_PORT, MotorType.kBrushless);
+
+    rightSparkOne.setInverted(false);
+    rightSparkTwo.setInverted(false);
+    leftSparkOne.setInverted(true);
+    leftSparkTwo.setInverted(true);
+
     MotorControllerGroup leftSparks = new MotorControllerGroup(leftSparkOne, leftSparkTwo);
     MotorControllerGroup rightSparks = new MotorControllerGroup(rightSparkOne, rightSparkTwo);
 
@@ -34,8 +40,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   }
 
-  public void tankDrive(double leftPower, double rightPower){
-    drive.tankDrive(leftPower, rightPower);
+  public void drive(double leftPower, double rightPower){
+    drive.curvatureDrive(leftPower, rightPower,true);
   }
 
   @Override

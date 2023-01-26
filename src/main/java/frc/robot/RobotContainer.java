@@ -31,7 +31,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     drivetrainSubsystem = new DrivetrainSubsystem();
-    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.tankDrive(driverController.getLeftY(), driverController.getRightY()), drivetrainSubsystem));
+    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(driverController.getLeftY(), driverController.getRightY()), drivetrainSubsystem));
     configureBindings();
 
   }

@@ -14,10 +14,10 @@ package frc.robot;
  */
 public final class Constants {
   public static final int kDriverControllerPort = 0;
-  public static final int LEFT_SPARK_ONE_PORT = 0;
-  public static final int LEFT_SPARK_TWO_PORT = 0;
-  public static final int RIGHT_SPARK_ONE_PORT = 0;
-  public static final int RIGHT_SPARK_TWO_PORT = 0;
+  public static final int LEFT_SPARK_ONE_PORT = 3;
+  public static final int LEFT_SPARK_TWO_PORT = 4;
+  public static final int RIGHT_SPARK_ONE_PORT = 1;
+  public static final int RIGHT_SPARK_TWO_PORT = 2;
   
 
 }
