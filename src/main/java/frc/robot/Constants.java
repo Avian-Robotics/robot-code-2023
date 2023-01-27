@@ -19,5 +19,5 @@ public final class Constants {
   public static final int RIGHT_SPARK_ONE_PORT = 1;
   public static final int RIGHT_SPARK_TWO_PORT = 2;
   
-
+  public static final int[] ROLLER_BAR_SOLENOID = {0, 0};
 }
