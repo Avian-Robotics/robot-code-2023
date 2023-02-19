@@ -20,4 +20,11 @@ public final class Constants {
   public static final int RIGHT_SPARK_TWO_PORT = 2;
   
   public static final int[] ROLLER_BAR_SOLENOID = {0, 0};
+
+  public static final int LEFT_CLAW_SPARK = 0;
+  public static final int RIGHT_CLAW_SPARK = 0;
+
+  public static final int ELEVATOR_SPARK = 0;
+  
 }
+

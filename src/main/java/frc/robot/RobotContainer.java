@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -52,13 +53,15 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    JoystickButton rightTrigger = new JoystickButton(driverController, 7);
-    rightTrigger.onTrue( new InstantCommand(() -> rollerClawSubsystem.closeClaw(), rollerClawSubsystem));
 
-    JoystickButton leftTrigger = new JoystickButton(driverController, 6);
-    leftTrigger.onTrue( new InstantCommand(()  -> rollerClawSubsystem.openClaw(), rollerClawSubsystem));
+    new JoystickButton(driverController, 7).onTrue(new StartEndCommand(() -> rollerClawSubsystem.intakeRotation(), () -> rollerClawSubsystem.haltRotation(), rollerClawSubsystem));
+
+    new JoystickButton(driverController, 6).onTrue(new StartEndCommand(()  -> rollerClawSubsystem.outtakeRotation(), () -> rollerClawSubsystem.haltRotation(), rollerClawSubsystem));
   
-    
+    new JoystickButton(driverController, 4).onTrue(new InstantCommand(() -> rollerClawSubsystem.closeClaw(), rollerClawSubsystem));
+
+    new JoystickButton(driverController, 5).onTrue(new InstantCommand(() -> rollerClawSubsystem.openClaw(), rollerClawSubsystem));
+
   }
 
   /**
