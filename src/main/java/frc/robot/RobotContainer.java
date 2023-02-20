@@ -42,6 +42,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     drivetrainSubsystem = new DrivetrainSubsystem();
     rollerClawSubsystem = new RollerClawSubsystem();
+    elevatorSubsystem = new ElevatorSubsystem();
     drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(driverController.getLeftY(), driverController.getRightY()), drivetrainSubsystem));
     wristSubsystem = new WristSubsystem();
     
