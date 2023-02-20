@@ -18,7 +18,8 @@ public final class Constants {
   public static final int LEFT_SPARK_TWO_PORT = 4;
   public static final int RIGHT_SPARK_ONE_PORT = 1;
   public static final int RIGHT_SPARK_TWO_PORT = 2;
-  
+  public static final int WRIST_SPARK_PORT = 0;
+  public static final double WRIST_MOVEMENT_SPEED = 0.25;
   public static final int[] ROLLER_BAR_SOLENOID = {0, 0};
 
   public static final int LEFT_CLAW_SPARK = 0;
