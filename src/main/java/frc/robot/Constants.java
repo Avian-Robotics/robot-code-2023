@@ -26,6 +26,8 @@ public final class Constants {
   public static final int RIGHT_CLAW_SPARK = 0;
 
   public static final int ELEVATOR_SPARK = 0;
-  
+
+  public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.75;
+  public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = 0.5;
 }
 

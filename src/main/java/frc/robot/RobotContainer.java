@@ -5,7 +5,10 @@
 package frc.robot;
 
 import frc.robot.commands.Autos;
+import frc.robot.commands.ElevatorDownCommand;
+import frc.robot.commands.ElevatorUpCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.RollerClawSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -28,6 +31,7 @@ public class RobotContainer {
   private DrivetrainSubsystem drivetrainSubsystem;
   private RollerClawSubsystem rollerClawSubsystem;
   private WristSubsystem wristSubsystem;
+  private ElevatorSubsystem elevatorSubsystem;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController driverController =
@@ -40,6 +44,7 @@ public class RobotContainer {
     rollerClawSubsystem = new RollerClawSubsystem();
     drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(driverController.getLeftY(), driverController.getRightY()), drivetrainSubsystem));
     wristSubsystem = new WristSubsystem();
+    
     configureBindings();
 
   }
@@ -68,7 +73,12 @@ public class RobotContainer {
     new JoystickButton(driverController, 0).onTrue(new StartEndCommand(() -> wristSubsystem.upWrist(), () -> wristSubsystem.stopWrist(), wristSubsystem)); 
     
     new JoystickButton(driverController, 2).onTrue(new StartEndCommand(() -> wristSubsystem.downWrist(), () -> wristSubsystem.stopWrist(), wristSubsystem));
+
+    new JoystickButton(driverController, 3).onTrue(new ElevatorUpCommand(elevatorSubsystem));
+    
+    new JoystickButton(driverController, 1).onTrue(new ElevatorDownCommand(elevatorSubsystem));
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
