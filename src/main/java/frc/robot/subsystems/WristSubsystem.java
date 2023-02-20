@@ -16,8 +16,13 @@ public class WristSubsystem extends SubsystemBase {
   
   public WristSubsystem() {
     wrist = new CANSparkMax(Constants.WRIST_SPARK_PORT, MotorType.kBrushless);
-    // TODO: Make encoder
     wrist.setIdleMode(IdleMode.kBrake);
+    
+    wrist.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.UPPER_LIMIT_WRIST);
+    wrist.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.LOWER_LIMIT_WRIST);
+
+    wrist.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    wrist.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
   }
   public void upWrist () {
     wrist.set(Constants.WRIST_MOVEMENT_SPEED);
