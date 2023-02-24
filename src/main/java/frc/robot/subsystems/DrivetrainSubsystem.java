@@ -30,8 +30,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     rightSparkOne.setInverted(false);
     rightSparkTwo.setInverted(false);
-    leftSparkOne.setInverted(true);
-    leftSparkTwo.setInverted(true);
+    leftSparkOne.setInverted(false);
+    leftSparkTwo.setInverted(false);
 
     MotorControllerGroup leftSparks = new MotorControllerGroup(leftSparkOne, leftSparkTwo);
     MotorControllerGroup rightSparks = new MotorControllerGroup(rightSparkOne, rightSparkTwo);

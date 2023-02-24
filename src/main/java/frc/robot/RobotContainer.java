@@ -43,7 +43,7 @@ public class RobotContainer {
     drivetrainSubsystem = new DrivetrainSubsystem();
     rollerClawSubsystem = new RollerClawSubsystem();
     elevatorSubsystem = new ElevatorSubsystem();
-    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(driverController.getLeftY(), driverController.getRightY()), drivetrainSubsystem));
+    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(driverController.getRawAxis(1), driverController.getRawAxis(2)), drivetrainSubsystem));
     wristSubsystem = new WristSubsystem();
     
     configureBindings();
@@ -62,22 +62,33 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
+    new JoystickButton(driverController, 8).whileTrue(new StartEndCommand(rollerClawSubsystem::intakeRotation, rollerClawSubsystem::haltRotation, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 7).onTrue(new StartEndCommand(() -> rollerClawSubsystem.intakeRotation(), () -> rollerClawSubsystem.haltRotation(), rollerClawSubsystem));
-
-    new JoystickButton(driverController, 6).onTrue(new StartEndCommand(()  -> rollerClawSubsystem.outtakeRotation(), () -> rollerClawSubsystem.haltRotation(), rollerClawSubsystem));
+    new JoystickButton(driverController, 7).whileTrue(new StartEndCommand(rollerClawSubsystem::outtakeRotation,  rollerClawSubsystem::haltRotation, rollerClawSubsystem));
   
-    new JoystickButton(driverController, 4).onTrue(new InstantCommand(() -> rollerClawSubsystem.closeClaw(), rollerClawSubsystem));
+    new JoystickButton(driverController, 5).onTrue(new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 5).onTrue(new InstantCommand(() -> rollerClawSubsystem.openClaw(), rollerClawSubsystem));
+    new JoystickButton(driverController, 6).onTrue(new InstantCommand(rollerClawSubsystem::openClaw, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 0).onTrue(new StartEndCommand(() -> wristSubsystem.upWrist(), () -> wristSubsystem.stopWrist(), wristSubsystem)); 
+    new JoystickButton(driverController, 1).whileTrue(new StartEndCommand(() -> {
+      wristSubsystem.upWrist();
+      wristSubsystem.releaseBreak();
+    }, () -> {
+      wristSubsystem.stopWrist();
+      wristSubsystem.brake();
+    }, wristSubsystem)); 
     
-    new JoystickButton(driverController, 2).onTrue(new StartEndCommand(() -> wristSubsystem.downWrist(), () -> wristSubsystem.stopWrist(), wristSubsystem));
+    new JoystickButton(driverController, 3).whileTrue(new StartEndCommand(() -> {
+      wristSubsystem.downWrist();
+      wristSubsystem.releaseBreak();
+    }, ()-> {
+        wristSubsystem.stopWrist();
+        wristSubsystem.brake();
+      }, wristSubsystem));
 
-    new JoystickButton(driverController, 3).onTrue(new ElevatorUpCommand(elevatorSubsystem));
+    new JoystickButton(driverController, 4).whileTrue(new ElevatorUpCommand(elevatorSubsystem));
     
-    new JoystickButton(driverController, 1).onTrue(new ElevatorDownCommand(elevatorSubsystem));
+    new JoystickButton(driverController, 2).whileTrue(new ElevatorDownCommand(elevatorSubsystem));
   }
 
 
