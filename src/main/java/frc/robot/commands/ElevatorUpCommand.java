@@ -24,13 +24,10 @@ public class ElevatorUpCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (elevatorSubsystem.upperLimit()){
-      elevatorSubsystem.stopElevator();
-    } else {
-      elevatorSubsystem.upElevator();  
+    elevatorSubsystem.upElevator();  
     }
     
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override

@@ -15,31 +15,34 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class WristSubsystem extends SubsystemBase {
-  private CANSparkMax wrist;
+  private CANSparkMax wristSpark;
   private DoubleSolenoid brake;
   public WristSubsystem() {
-    wrist = new CANSparkMax(Constants.WRIST_SPARK_PORT, MotorType.kBrushless);
-    wrist.setIdleMode(IdleMode.kBrake);
+    wristSpark = new CANSparkMax(Constants.WRIST_SPARK_PORT, MotorType.kBrushless);
+    wristSpark.setIdleMode(IdleMode.kBrake);
     
-    wrist.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.UPPER_LIMIT_WRIST);
-    wrist.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.LOWER_LIMIT_WRIST);
+   // wristSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.UPPER_LIMIT_WRIST);
+    //wristSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.LOWER_LIMIT_WRIST);
 
 
-    wrist.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
-    wrist.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
-
+   // wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
+   // wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
+//Is the code above needed?^
     brake = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.WRIST_BRAKE_SOLENOID[0], Constants.WRIST_BRAKE_SOLENOID[1]);
+
+    wristSpark.getEncoder().setPosition(Constants.LOWER_LIMIT_WRIST);
+
   }
   public void upWrist () {
-    wrist.set(Constants.WRIST_MOVEMENT_SPEED);
+    wristSpark.set(Constants.WRIST_MOVEMENT_SPEED);
   }
 
   public void downWrist () {
-    wrist.set(-Constants.WRIST_MOVEMENT_SPEED);
+    wristSpark.set(-Constants.WRIST_MOVEMENT_SPEED);
   }
 
   public void stopWrist () {
-    wrist.set(0);
+    wristSpark.set(0);
   }
   public void brake () {
     brake.set(Value.kForward);
@@ -50,6 +53,11 @@ public class WristSubsystem extends SubsystemBase {
 
     @Override
   public void periodic() {
-    // This method will be called once per schedu
+    if(wristSpark.getEncoder().getPosition() > Constants.LOWER_LIMIT_WRIST){
+      stopWrist();
+    }
+    if(wristSpark.getEncoder().getPosition() < Constants.UPPER_LIMIT_WRIST){
+      stopWrist();
+    }
   }
 }

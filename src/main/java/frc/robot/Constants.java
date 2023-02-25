@@ -18,19 +18,17 @@ public final class Constants {
   public static final int LEFT_SPARK_TWO_PORT = 4;
   public static final int RIGHT_SPARK_ONE_PORT = 1;
   public static final int RIGHT_SPARK_TWO_PORT = 2;
-  public static final int WRIST_SPARK_PORT = 6;
-  public static final double WRIST_MOVEMENT_SPEED = 0.10;
-  public static final int[] ROLLER_BAR_SOLENOID = {0, 1};
-  public static final int[] WRIST_BRAKE_SOLENOID = {2, 3};
 
+  public static final int[] ROLLER_BAR_SOLENOID = {0, 1};
   public static final int LEFT_CLAW_SPARK = 8;
   public static final int RIGHT_CLAW_SPARK = 7;
 
-  public static final int ELEVATOR_SPARK = 5;
   
-  public static final int UPPER_LIMIT_WRIST = 0;
-  public static final int LOWER_LIMIT_WRIST = 0;
-  
+  public static final double UPPER_LIMIT_WRIST = -26.75;
+  public static final double LOWER_LIMIT_WRIST = 0.0;
+  public static final int[] WRIST_BRAKE_SOLENOID = {2, 3};
+  public static final int WRIST_SPARK_PORT = 6;
+  public static final double WRIST_MOVEMENT_SPEED = 0.10;
   
 
   public static final class ElevatorConstant {
@@ -39,6 +37,7 @@ public final class Constants {
     public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.75;
     public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = 0.5;
     }
+  public static final int ELEVATOR_SPARK = 5;
 
 
 }

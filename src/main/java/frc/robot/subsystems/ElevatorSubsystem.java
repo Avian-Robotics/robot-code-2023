@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -18,8 +19,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   
   // Neo Controller
   private CANSparkMax elevatorSpark;
-  private SparkMaxLimitSwitch upperLimit;
-  private SparkMaxLimitSwitch lowerLimit;
+  private DigitalInput magSwitch;
 
 
   public ElevatorSubsystem() {
@@ -28,6 +28,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorSpark.setIdleMode(IdleMode.kBrake);
 
     elevatorSpark.getEncoder().setPosition(Constants.ElevatorConstant.LOWER_LIMIT_ELEVATOR);
+
+    magSwitch = new DigitalInput(9);
   }
   
   public void upElevator () {
@@ -42,19 +44,14 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorSpark.set(0);
   }
 
-  public boolean upperLimit() {
-    return upperLimit.isPressed();
-  }  
-
-  public boolean lowerLimit() {
-    return lowerLimit.isPressed();
-  }  
+  public boolean getMagSwitch() {
+    return magSwitch.get();
+  }
 
   @Override
   public void periodic() {
-  System.out.println(elevatorSpark.getEncoder().getPosition());
-/*if (lowerLimit.isPressed() == true){
+  if (getMagSwitch()){
     elevatorSpark.getEncoder().setPosition(0.0);
-    }*/
+    }
   }
 }
