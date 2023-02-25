@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -23,17 +24,18 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public ElevatorSubsystem() {
     elevatorSpark = new CANSparkMax(Constants.ELEVATOR_SPARK, MotorType.kBrushless);
-    upperLimit = elevatorSpark.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
-    lowerLimit = elevatorSpark.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyClosed);
+    elevatorSpark.setSoftLimit(SoftLimitDirection.kForward, Constants.ElevatorConstant.UPPER_LIMIT_ELEVATOR);
     elevatorSpark.setIdleMode(IdleMode.kBrake);
+
+    elevatorSpark.getEncoder().setPosition(Constants.ElevatorConstant.LOWER_LIMIT_ELEVATOR);
   }
   
   public void upElevator () {
-    elevatorSpark.set(Constants.ELEVATOR_MOVEMENT_SPEED_UP);
+    elevatorSpark.set(Constants.ElevatorConstant.ELEVATOR_MOVEMENT_SPEED_UP);
   }
 
   public void downElevator () {
-    elevatorSpark.set(Constants.ELEVATOR_MOVEMENT_SPEED_DOWN);
+    elevatorSpark.set(Constants.ElevatorConstant.ELEVATOR_MOVEMENT_SPEED_DOWN);
   }
 
   public void stopElevator () {
@@ -50,6 +52,9 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+  System.out.println(elevatorSpark.getEncoder().getPosition());
+/*if (lowerLimit.isPressed() == true){
+    elevatorSpark.getEncoder().setPosition(0.0);
+    }*/
   }
 }

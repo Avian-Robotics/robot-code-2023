@@ -31,8 +31,14 @@ public final class Constants {
   public static final int UPPER_LIMIT_WRIST = 0;
   public static final int LOWER_LIMIT_WRIST = 0;
   
-  public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.75;
-  public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = 0.5;
+  
+
+  public static final class ElevatorConstant {
+    public static final float UPPER_LIMIT_ELEVATOR = 45;
+    public static final double LOWER_LIMIT_ELEVATOR = 0.0;
+    public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.75;
+    public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = 0.5;
+    }
 
 
 }

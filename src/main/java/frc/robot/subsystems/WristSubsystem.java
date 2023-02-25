@@ -24,6 +24,7 @@ public class WristSubsystem extends SubsystemBase {
     wrist.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.UPPER_LIMIT_WRIST);
     wrist.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.LOWER_LIMIT_WRIST);
 
+
     wrist.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
     wrist.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
 
