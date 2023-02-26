@@ -26,6 +26,9 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorSpark = new CANSparkMax(Constants.ELEVATOR_SPARK, MotorType.kBrushless);
     elevatorSpark.setSoftLimit(SoftLimitDirection.kForward, Constants.ElevatorConstant.UPPER_LIMIT_ELEVATOR);
     elevatorSpark.setIdleMode(IdleMode.kBrake);
+    elevatorSpark.setSoftLimit(SoftLimitDirection.kReverse, (float) 0.1);
+    elevatorSpark.enableSoftLimit(SoftLimitDirection.kForward, true);
+    elevatorSpark.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
     elevatorSpark.getEncoder().setPosition(Constants.ElevatorConstant.LOWER_LIMIT_ELEVATOR);
 
@@ -45,7 +48,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public boolean getMagSwitch() {
-    return magSwitch.get();
+    return !magSwitch.get();
   }
 
   @Override

@@ -20,17 +20,17 @@ public class WristSubsystem extends SubsystemBase {
   public WristSubsystem() {
     wristSpark = new CANSparkMax(Constants.WRIST_SPARK_PORT, MotorType.kBrushless);
     wristSpark.setIdleMode(IdleMode.kBrake);
+    wristSpark.setInverted(true);
     
-   // wristSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.UPPER_LIMIT_WRIST);
-    //wristSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.LOWER_LIMIT_WRIST);
+    wristSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.UPPER_LIMIT_WRIST);
+    wristSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.LOWER_LIMIT_WRIST);
 
 
-   // wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
-   // wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
-//Is the code above needed?^
+   wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+   wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
     brake = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.WRIST_BRAKE_SOLENOID[0], Constants.WRIST_BRAKE_SOLENOID[1]);
 
-    wristSpark.getEncoder().setPosition(Constants.LOWER_LIMIT_WRIST);
+    wristSpark.getEncoder().setPosition(0.0);
 
   }
   public void upWrist () {
@@ -45,19 +45,18 @@ public class WristSubsystem extends SubsystemBase {
     wristSpark.set(0);
   }
   public void brake () {
+    stopWrist();
     brake.set(Value.kForward);
+    wristSpark.setIdleMode(IdleMode.kCoast);
   }
   public void releaseBreak () {
     brake.set(Value.kReverse);
+    wristSpark.setIdleMode(IdleMode.kBrake);
   }
 
     @Override
   public void periodic() {
-    if(wristSpark.getEncoder().getPosition() > Constants.LOWER_LIMIT_WRIST){
-      stopWrist();
-    }
-    if(wristSpark.getEncoder().getPosition() < Constants.UPPER_LIMIT_WRIST){
-      stopWrist();
-    }
+    System.out.println(wristSpark.getEncoder().getPosition());
+    //if (wristSpark.)
   }
 }

@@ -71,16 +71,16 @@ public class RobotContainer {
     new JoystickButton(driverController, 6).onTrue(new InstantCommand(rollerClawSubsystem::openClaw, rollerClawSubsystem));
 
     new JoystickButton(driverController, 1).whileTrue(new StartEndCommand(() -> {
-      wristSubsystem.upWrist();
       wristSubsystem.releaseBreak();
+      wristSubsystem.upWrist();
     }, () -> {
       wristSubsystem.stopWrist();
       wristSubsystem.brake();
     }, wristSubsystem)); 
     
     new JoystickButton(driverController, 3).whileTrue(new StartEndCommand(() -> {
-      wristSubsystem.downWrist();
       wristSubsystem.releaseBreak();
+      wristSubsystem.downWrist();
     }, ()-> {
         wristSubsystem.stopWrist();
         wristSubsystem.brake();

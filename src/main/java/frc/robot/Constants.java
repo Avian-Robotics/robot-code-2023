@@ -24,8 +24,8 @@ public final class Constants {
   public static final int RIGHT_CLAW_SPARK = 7;
 
   
-  public static final double UPPER_LIMIT_WRIST = -26.75;
-  public static final double LOWER_LIMIT_WRIST = 0.0;
+  public static final float UPPER_LIMIT_WRIST = (float) 24.0;
+  public static final float LOWER_LIMIT_WRIST = (float) 0.1;
   public static final int[] WRIST_BRAKE_SOLENOID = {2, 3};
   public static final int WRIST_SPARK_PORT = 6;
   public static final double WRIST_MOVEMENT_SPEED = 0.10;
@@ -33,9 +33,9 @@ public final class Constants {
 
   public static final class ElevatorConstant {
     public static final float UPPER_LIMIT_ELEVATOR = 45;
-    public static final double LOWER_LIMIT_ELEVATOR = 0.0;
-    public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.75;
-    public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = 0.5;
+    public static final double LOWER_LIMIT_ELEVATOR = 0.1;
+    public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.2;
+    public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = -0.2;
     }
   public static final int ELEVATOR_SPARK = 5;
 
