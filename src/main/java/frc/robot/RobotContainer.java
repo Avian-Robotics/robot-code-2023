@@ -4,9 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
-import frc.robot.commands.ElevatorDownCommand;
-import frc.robot.commands.ElevatorUpCommand;
+import frc.robot.commands.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.RollerClawSubsystem;
@@ -46,7 +44,7 @@ public class RobotContainer {
     elevatorSubsystem = new ElevatorSubsystem();
     drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(driverController.getRawAxis(1), driverController.getRawAxis(2)), drivetrainSubsystem));
     wristSubsystem = new WristSubsystem();
-    
+
     configureBindings();
 
   }
@@ -77,24 +75,12 @@ public class RobotContainer {
       }
     }, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 1).whileTrue(new StartEndCommand(() -> {
-      wristSubsystem.releaseBreak();
-      wristSubsystem.upWrist();
-    }, () -> {
-      wristSubsystem.stopWrist();
-      wristSubsystem.brake();
-    }, wristSubsystem)); 
-    
-    new JoystickButton(driverController, 3).whileTrue(new StartEndCommand(() -> {
-      wristSubsystem.releaseBreak();
-      wristSubsystem.downWrist();
-    }, ()-> {
-        wristSubsystem.stopWrist();
-        wristSubsystem.brake();
-      }, wristSubsystem));
+    new JoystickButton(driverController, 1).whileTrue(new MoveWristUpCommand(wristSubsystem));
+
+    new JoystickButton(driverController, 3).whileTrue(new MoveWristDownCommand(wristSubsystem));
 
     new JoystickButton(driverController, 4).whileTrue(new ElevatorUpCommand(elevatorSubsystem));
-    
+
     new JoystickButton(driverController, 2).whileTrue(new ElevatorDownCommand(elevatorSubsystem));
   }
 
