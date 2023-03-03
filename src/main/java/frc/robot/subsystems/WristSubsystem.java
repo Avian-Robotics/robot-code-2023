@@ -56,7 +56,12 @@ public class WristSubsystem extends SubsystemBase {
 
     @Override
   public void periodic() {
-    System.out.println(wristSpark.getEncoder().getPosition());
-    //if (wristSpark.)
+   if (wristSpark.getEncoder().getPosition() >= Constants.UPPER_LIMIT_WRIST){
+      brake();
+   }
+   if (wristSpark.getEncoder().getPosition() <= Constants.LOWER_LIMIT_WRIST){
+      brake();
+   }
+    
   }
 }
