@@ -30,6 +30,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorSpark.enableSoftLimit(SoftLimitDirection.kForward, true);
     elevatorSpark.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
+    elevatorSpark.setSmartCurrentLimit(35);
+
     elevatorSpark.getEncoder().setPosition(Constants.ElevatorConstant.LOWER_LIMIT_ELEVATOR);
 
     magSwitch = new DigitalInput(9);
@@ -44,7 +46,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void stopElevator () {
-    elevatorSpark.set(0);
+    elevatorSpark.set(0.05);
   }
 
   public boolean getMagSwitch() {

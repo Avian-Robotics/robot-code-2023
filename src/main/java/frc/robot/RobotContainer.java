@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -65,10 +66,16 @@ public class RobotContainer {
     new JoystickButton(driverController, 8).whileTrue(new StartEndCommand(rollerClawSubsystem::intakeRotation, rollerClawSubsystem::haltRotation, rollerClawSubsystem));
 
     new JoystickButton(driverController, 7).whileTrue(new StartEndCommand(rollerClawSubsystem::outtakeRotation,  rollerClawSubsystem::haltRotation, rollerClawSubsystem));
-  
-    new JoystickButton(driverController, 5).onTrue(new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 6).onTrue(new InstantCommand(rollerClawSubsystem::openClaw, rollerClawSubsystem));
+    new JoystickButton(driverController, 6).onTrue(new InstantCommand(() -> {
+      if (rollerClawSubsystem.getClaw() == Value.kForward){
+        rollerClawSubsystem.openClaw();
+      }
+      else
+      {
+        rollerClawSubsystem.closeClaw();
+      }
+    }, rollerClawSubsystem));
 
     new JoystickButton(driverController, 1).whileTrue(new StartEndCommand(() -> {
       wristSubsystem.releaseBreak();

@@ -26,8 +26,8 @@ public class WristSubsystem extends SubsystemBase {
     wristSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.LOWER_LIMIT_WRIST);
 
 
-   wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-   wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+   wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, false);
+   wristSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, false);
     brake = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.WRIST_BRAKE_SOLENOID[0], Constants.WRIST_BRAKE_SOLENOID[1]);
 
     wristSpark.getEncoder().setPosition(0.0);

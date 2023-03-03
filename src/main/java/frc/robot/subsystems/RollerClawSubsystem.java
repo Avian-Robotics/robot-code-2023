@@ -21,7 +21,7 @@ public class RollerClawSubsystem extends SubsystemBase {
 
   /** Creates a new RollerClawSubsystem. */
   public RollerClawSubsystem() {
-    occidentalDisciple = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.ROLLER_BAR_SOLENOID[0], Constants.ROLLER_BAR_SOLENOID[1]);
+    occidentalDisciple = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.ROLLER_BAR_SOLENOID[0], Constants.ROLLER_BAR_SOLENOID[1]);
     leftTendon = new CANSparkMax(Constants.LEFT_CLAW_SPARK, MotorType.kBrushless);
     rightTendon = new CANSparkMax(Constants.RIGHT_CLAW_SPARK, MotorType.kBrushless);
     leftTendon.follow(rightTendon, true);
@@ -33,6 +33,10 @@ public class RollerClawSubsystem extends SubsystemBase {
 
   public void openClaw(){
     occidentalDisciple.set(Value.kReverse);
+  }
+
+  public Value getClaw(){
+    return occidentalDisciple.get();
   }
   
   @Override
