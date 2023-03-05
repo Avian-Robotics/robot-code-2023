@@ -33,10 +33,22 @@ public class DrivetrainSubsystem extends SubsystemBase {
     leftSparkOne.setInverted(true);
     leftSparkTwo.setInverted(true);
 
+    leftSparkOne.setSmartCurrentLimit(50);
+    leftSparkTwo.setSmartCurrentLimit(50);
+    rightSparkOne.setSmartCurrentLimit(50);
+    rightSparkTwo.setSmartCurrentLimit(50);
+
+    rightSparkOne.burnFlash();
+    rightSparkTwo.burnFlash();
+    leftSparkOne.burnFlash();
+    leftSparkTwo.burnFlash();
+
     MotorControllerGroup leftSparks = new MotorControllerGroup(leftSparkOne, leftSparkTwo);
     MotorControllerGroup rightSparks = new MotorControllerGroup(rightSparkOne, rightSparkTwo);
 
     drive = new DifferentialDrive(leftSparks, rightSparks);
+
+
 
   }
 
