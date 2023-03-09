@@ -23,20 +23,20 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
 
   public DrivetrainSubsystem() {
-    leftSparkOne = new CANSparkMax(Constants.LEFT_SPARK_ONE_PORT, MotorType.kBrushless);
-    leftSparkTwo = new CANSparkMax(Constants.LEFT_SPARK_TWO_PORT, MotorType.kBrushless);
-    rightSparkOne = new CANSparkMax(Constants.RIGHT_SPARK_ONE_PORT, MotorType.kBrushless);
-    rightSparkTwo = new CANSparkMax(Constants.RIGHT_SPARK_TWO_PORT, MotorType.kBrushless);
+    leftSparkOne = new CANSparkMax(Constants.LEFT_SPARK_ONE_PORT, MotorType.kBrushed);
+    leftSparkTwo = new CANSparkMax(Constants.LEFT_SPARK_TWO_PORT, MotorType.kBrushed);
+    rightSparkOne = new CANSparkMax(Constants.RIGHT_SPARK_ONE_PORT, MotorType.kBrushed);
+    rightSparkTwo = new CANSparkMax(Constants.RIGHT_SPARK_TWO_PORT, MotorType.kBrushed);
 
     rightSparkOne.setInverted(false);
     rightSparkTwo.setInverted(false);
     leftSparkOne.setInverted(true);
     leftSparkTwo.setInverted(true);
 
-    leftSparkOne.setSmartCurrentLimit(50);
-    leftSparkTwo.setSmartCurrentLimit(50);
-    rightSparkOne.setSmartCurrentLimit(50);
-    rightSparkTwo.setSmartCurrentLimit(50);
+    leftSparkOne.setSmartCurrentLimit(40);
+    leftSparkTwo.setSmartCurrentLimit(40);
+    rightSparkOne.setSmartCurrentLimit(40);
+    rightSparkTwo.setSmartCurrentLimit(40);
 
     rightSparkOne.burnFlash();
     rightSparkTwo.burnFlash();

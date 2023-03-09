@@ -22,6 +22,7 @@ public class WristSubsystem extends SubsystemBase {
     brake = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.WRIST_BRAKE_SOLENOID[0], Constants.WRIST_BRAKE_SOLENOID[1]);
     wristSpark.setIdleMode(IdleMode.kBrake);
     wristSpark.setInverted(true);
+    wristSpark.setSmartCurrentLimit(40);
 
     wristSpark.getEncoder().setPosition(0.0);
   }

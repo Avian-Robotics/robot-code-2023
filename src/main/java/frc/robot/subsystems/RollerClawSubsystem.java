@@ -25,6 +25,8 @@ public class RollerClawSubsystem extends SubsystemBase {
     leftTendon = new CANSparkMax(Constants.LEFT_CLAW_SPARK, MotorType.kBrushless);
     rightTendon = new CANSparkMax(Constants.RIGHT_CLAW_SPARK, MotorType.kBrushless);
     leftTendon.follow(rightTendon, true);
+    leftTendon.setSmartCurrentLimit(40);
+    rightTendon.setSmartCurrentLimit(40);
 
   }
   public void closeClaw() {
