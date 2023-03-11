@@ -13,11 +13,11 @@ public final class Autos {
   /** Example static factory for an autonomous command. */
 
   public static CommandBase driveForward(DrivetrainSubsystem drivetrainSubsystem){
-    return Commands.runEnd(() -> drivetrainSubsystem.drive(0.85, 0.0),
+    return Commands.runEnd(() -> drivetrainSubsystem.drive(0.50, 0.0),
     () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
     .withTimeout(3)
     .andThen(
-      Commands.runEnd(() -> drivetrainSubsystem.drive(-0.55, 0.0),
+      Commands.runEnd(() -> drivetrainSubsystem.drive(-0.50, 0.0),
     () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
     .withTimeout(2)
     );

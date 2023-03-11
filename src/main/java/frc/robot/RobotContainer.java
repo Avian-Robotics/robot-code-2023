@@ -36,6 +36,9 @@ public class RobotContainer {
   private final XboxController driverController =
       new XboxController(Constants.kDriverControllerPort);
 
+  private final XboxController driverControllerTwo =
+      new XboxController(Constants.kDriverControllerTwoPort);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -61,11 +64,11 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    new JoystickButton(driverController, 8).whileTrue(new StartEndCommand(rollerClawSubsystem::intakeRotation, rollerClawSubsystem::haltRotation, rollerClawSubsystem));
+    new JoystickButton(driverControllerTwo, 8).whileTrue(new StartEndCommand(rollerClawSubsystem::intakeRotation, rollerClawSubsystem::haltRotation, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 7).whileTrue(new StartEndCommand(rollerClawSubsystem::outtakeRotation,  rollerClawSubsystem::haltRotation, rollerClawSubsystem));
+    new JoystickButton(driverControllerTwo, 7).whileTrue(new StartEndCommand(rollerClawSubsystem::outtakeRotation,  rollerClawSubsystem::haltRotation, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 6).onTrue(new InstantCommand(() -> {
+    new JoystickButton(driverControllerTwo, 6).onTrue(new InstantCommand(() -> {
       if (rollerClawSubsystem.getClaw() == Value.kForward){
         rollerClawSubsystem.openClaw();
       }
@@ -75,13 +78,13 @@ public class RobotContainer {
       }
     }, rollerClawSubsystem));
 
-    new JoystickButton(driverController, 1).whileTrue(new MoveWristUpCommand(wristSubsystem));
+    new JoystickButton(driverControllerTwo, 1).whileTrue(new MoveWristUpCommand(wristSubsystem));
 
-    new JoystickButton(driverController, 3).whileTrue(new MoveWristDownCommand(wristSubsystem));
+    new JoystickButton(driverControllerTwo, 3).whileTrue(new MoveWristDownCommand(wristSubsystem));
 
-    new JoystickButton(driverController, 4).whileTrue(new ElevatorUpCommand(elevatorSubsystem));
+    new JoystickButton(driverControllerTwo, 4).whileTrue(new ElevatorUpCommand(elevatorSubsystem));
 
-    new JoystickButton(driverController, 2).whileTrue(new ElevatorDownCommand(elevatorSubsystem));
+    new JoystickButton(driverControllerTwo, 2).whileTrue(new ElevatorDownCommand(elevatorSubsystem));
   }
 
 

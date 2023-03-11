@@ -34,11 +34,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     rightSparkTwo = new CANSparkMax(Constants.RIGHT_SPARK_TWO_PORT, MotorType.kBrushed);
     rightSparkThree = new CANSparkMax(Constants.RIGHT_SPARK_THREE_PORT, MotorType.kBrushed);
 
-    rightSparkOne.setInverted(false);
-    rightSparkTwo.setInverted(false);
+    rightSparkOne.setInverted(true);
+    rightSparkTwo.setInverted(true);
     rightSparkThree.setInverted(false);
-    leftSparkOne.setInverted(true);
-    leftSparkTwo.setInverted(true);
+    leftSparkOne.setInverted(false);
+    leftSparkTwo.setInverted(false);
     leftSparkThree.setInverted(false);
 
     leftSparkOne.setSmartCurrentLimit(40);
