@@ -53,6 +53,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     return !magSwitch.get();
   }
 
+  public double getElevatorPos() {
+    //This can be used to help find the position of the elevator incase the encoder level changes
+    return elevatorSpark.getEncoder().getPosition();
+  }
+
   @Override
   public void periodic() {
   if (getMagSwitch()){

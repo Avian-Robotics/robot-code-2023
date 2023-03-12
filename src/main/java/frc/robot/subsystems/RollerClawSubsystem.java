@@ -47,7 +47,7 @@ public class RollerClawSubsystem extends SubsystemBase {
   }
 
   public void intakeRotation() {
-    rightTendon.set(0.5);
+    rightTendon.set(Constants.ROLLER_SPEED);
   }
 
   public void haltRotation() {
@@ -55,7 +55,7 @@ public class RollerClawSubsystem extends SubsystemBase {
   }
 
   public void outtakeRotation() {
-    rightTendon.set(-0.5);
+    rightTendon.set(-Constants.ROLLER_SPEED);
   }
   
   
