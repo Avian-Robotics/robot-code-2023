@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 public class ElevatorUpCommand extends CommandBase {
@@ -24,8 +25,10 @@ public class ElevatorUpCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    elevatorSubsystem.upElevator();  
+    if (!isFinished()) {
+      elevatorSubsystem.upElevator();  
     }
+  }
     
   
 
@@ -38,6 +41,6 @@ public class ElevatorUpCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return elevatorSubsystem.getElevatorPos() >= Constants.ElevatorConstant.UPPER_LIMIT_ELEVATOR;
   }
 }

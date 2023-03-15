@@ -27,7 +27,7 @@ public class MoveWristUpCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return wristSubsystem.getWristPos() >= Constants.UPPER_LIMIT_WRIST;
+        return wristSubsystem.getWristPos() >= Constants.WristConstant.UPPER_LIMIT_WRIST;
     }
 
     @Override

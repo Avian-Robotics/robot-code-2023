@@ -27,19 +27,34 @@ public final class Constants {
   public static final int RIGHT_CLAW_SPARK = 7;
   public static final double ROLLER_SPEED = 0.2;
 
-  
-  public static final double UPPER_LIMIT_WRIST = 24.0;
-  public static final double LOWER_LIMIT_WRIST = 0.0;
-  public static final int[] WRIST_BRAKE_SOLENOID = {2, 3};
-  public static final int WRIST_SPARK_PORT = 6;
-  public static final double WRIST_MOVEMENT_SPEED = 0.2;
+  public static final class WristConstant{
+    public static final double UPPER_LIMIT_WRIST = 24.0;
+    public static final double LOWER_LIMIT_WRIST = 0.0;
+    public static final int[] WRIST_BRAKE_SOLENOID = {2, 3};
+    public static final int WRIST_SPARK_PORT = 6;
+    public static final double WRIST_MOVEMENT_SPEED = 0.2;
+    public static final double P = 0;
+    public static final double I = 0;
+    public static final double F = 0;
+    public static final double D = 0;
+    public static final double LEVEL_THREE = 0;
+    public static final double LEVEL_TWO = 0;
+    public static final double LEVEL_ONE = 0;
+  }
   
 
   public static final class ElevatorConstant {
-    public static final float UPPER_LIMIT_ELEVATOR = 45;
+    public static final float UPPER_LIMIT_ELEVATOR = 40;
     public static final double LOWER_LIMIT_ELEVATOR = 0.1;
-    public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.2;
-    public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = -0.2;
+    public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.35;
+    public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = -0.35;
+    public static final double P = 0.1;
+    public static final double I = 0;
+    public static final double F = 0.05;
+    public static final double D = 0;
+    public static final double LEVEL_THREE = 30;
+    public static final double LEVEL_TWO = 0;
+    public static final double LEVEL_ONE = 0;
     }
   public static final int ELEVATOR_SPARK = 5;
 

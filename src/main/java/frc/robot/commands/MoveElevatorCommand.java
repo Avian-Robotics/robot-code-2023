@@ -5,41 +5,38 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 
-public class ElevatorDownCommand extends CommandBase {
-  /** Creates a new ElevatorDownCommand. */
-  private ElevatorSubsystem elevatorSubsystem;
-
-  public ElevatorDownCommand(ElevatorSubsystem elevatorSubsystem) {
-    this.elevatorSubsystem = elevatorSubsystem; 
-    // Use addRequirements() here to declare subsystem dependencies.
+public class MoveElevatorCommand extends CommandBase {
+  /** Creates a new MoveElevator. */
+  private final ElevatorSubsystem elevatorSubsystem;
+  private final double position;
+  public MoveElevatorCommand(ElevatorSubsystem elevatorSubsystem, double position) {
+      this.elevatorSubsystem = elevatorSubsystem;
+      this.position = position;
+      addRequirements(this.elevatorSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    elevatorSubsystem.setSetpoint(position);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!isFinished()) {
-     elevatorSubsystem.downElevator();  
-    }
-    }
-    
-
+    elevatorSubsystem.moveElevatorPid();
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    elevatorSubsystem.stopElevator();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return elevatorSubsystem.getElevatorPos() <= Constants.ElevatorConstant.LOWER_LIMIT_ELEVATOR;
+    return elevatorSubsystem.atSetpoint();
   }
 }

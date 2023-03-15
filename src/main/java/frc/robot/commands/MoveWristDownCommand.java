@@ -27,7 +27,7 @@ public class MoveWristDownCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return wristSubsystem.getWristPos() <= Constants.LOWER_LIMIT_WRIST;
+        return wristSubsystem.getWristPos() <= Constants.WristConstant.LOWER_LIMIT_WRIST;
     }
 
     @Override

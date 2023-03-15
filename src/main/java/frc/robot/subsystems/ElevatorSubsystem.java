@@ -4,12 +4,17 @@
 
 package frc.robot.subsystems;
 
+import javax.sound.sampled.SourceDataLine;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,24 +22,35 @@ import frc.robot.Constants;
 
 public class ElevatorSubsystem extends SubsystemBase {
   
-  // Neo Controller
   private CANSparkMax elevatorSpark;
   private DigitalInput magSwitch;
-
+  private PIDController pidController;
 
   public ElevatorSubsystem() {
     elevatorSpark = new CANSparkMax(Constants.ELEVATOR_SPARK, MotorType.kBrushless);
     elevatorSpark.setSoftLimit(SoftLimitDirection.kForward, Constants.ElevatorConstant.UPPER_LIMIT_ELEVATOR);
     elevatorSpark.setIdleMode(IdleMode.kBrake);
-    elevatorSpark.setSoftLimit(SoftLimitDirection.kReverse, (float) 0.1);
-    elevatorSpark.enableSoftLimit(SoftLimitDirection.kForward, true);
-    elevatorSpark.enableSoftLimit(SoftLimitDirection.kReverse, true);
 
     elevatorSpark.setSmartCurrentLimit(35);
 
     elevatorSpark.getEncoder().setPosition(Constants.ElevatorConstant.LOWER_LIMIT_ELEVATOR);
 
     magSwitch = new DigitalInput(9);
+
+    pidController = new PIDController(Constants.ElevatorConstant.P, Constants.ElevatorConstant.I, Constants.ElevatorConstant.D);
+    pidController.setTolerance(4);
+  }
+
+  public void moveElevatorPid() {
+    elevatorSpark.set(MathUtil.clamp(pidController.calculate(getElevatorPos()) + Constants.ElevatorConstant.F, -0.3, 0.3));
+  }
+
+  public boolean atSetpoint() {
+    return pidController.atSetpoint();
+  }
+
+  public void setSetpoint(double setpoint) {
+    pidController.setSetpoint(setpoint);
   }
   
   public void upElevator () {
@@ -63,5 +79,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   if (getMagSwitch()){
     elevatorSpark.getEncoder().setPosition(0.0);
     }
+    System.out.println(getElevatorPos());
   }
+  
 }
