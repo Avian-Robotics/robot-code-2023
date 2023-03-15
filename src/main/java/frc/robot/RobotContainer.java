@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import frc.robot.Robot.AutoModes;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -93,8 +94,14 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousCommand(AutoModes autoModes) {
     // An example command will be run in autonomous
-    return Autos.driveForward(drivetrainSubsystem);
+    switch (autoModes) {
+      case SHOOT_BEHIND:
+        return Autos.scoreCube(drivetrainSubsystem, wristSubsystem, elevatorSubsystem, rollerClawSubsystem);
+        case DRIVE_FORWARD:
+        default:
+          return Autos.driveForward(drivetrainSubsystem);
+    }
   }
 }
