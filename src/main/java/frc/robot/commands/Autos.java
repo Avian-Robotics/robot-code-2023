@@ -38,7 +38,22 @@ public final class Autos {
       new ElevatorDownCommand(elevatorSubsystem)
         .alongWith(Commands.runEnd(() -> drivetrainSubsystem.drive(-0.30, 0.0),
         () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
-        .withTimeout(2.0))
+        .withTimeout(2.2))
+    );
+  }
+
+  public static CommandBase scoreForward(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
+    return Commands.sequence(
+      new ElevatorUpCommand(elevatorSubsystem),
+      new MoveWristUpCommand(wristSubsystem).withTimeout(0.6),
+      new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem),
+      new InstantCommand(rollerClawSubsystem::intakeRotation,rollerClawSubsystem),
+      new WaitCommand(1.5),
+      new InstantCommand(rollerClawSubsystem::haltRotation,rollerClawSubsystem),
+      new ElevatorDownCommand(elevatorSubsystem)
+        .alongWith(Commands.runEnd(() -> drivetrainSubsystem.drive(0.30, 0.0),
+        () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
+        .withTimeout(2.2))
     );
   }
 }

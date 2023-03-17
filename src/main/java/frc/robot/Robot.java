@@ -24,7 +24,9 @@ public class Robot extends TimedRobot {
 
   public enum AutoModes {
     DRIVE_FORWARD,
-    SHOOT_BEHIND
+    SHOOT_BEHIND,
+    SHOOT_FORWARD
+
   }
 
   private AutoModes selectedAutoMode;
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
     autoChooser = new SendableChooser<>();
     autoChooser.addOption("Drive Forward", AutoModes.DRIVE_FORWARD);
     autoChooser.addOption("Shoot Behind", AutoModes.SHOOT_BEHIND);
+    autoChooser.addOption("Shoot Forward", AutoModes.SHOOT_FORWARD);
     
     selectedAutoMode = autoChooser.getSelected();
     SmartDashboard.putData(autoChooser);
