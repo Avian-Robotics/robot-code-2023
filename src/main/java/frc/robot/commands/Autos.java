@@ -21,11 +21,11 @@ public final class Autos {
     return Commands.runEnd(() -> drivetrainSubsystem.drive(0.50, 0.0),
     () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
     .withTimeout(3)
-    .andThen(
-      Commands.runEnd(() -> drivetrainSubsystem.drive(-0.50, 0.0),
-    () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
-    .withTimeout(2)
-    );
+      .andThen(
+         Commands.runEnd(() -> drivetrainSubsystem.drive(-0.4, 0.0),
+       () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
+       .withTimeout(1.25)
+       );
   }
   public static CommandBase scoreCube(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
     return Commands.sequence(
