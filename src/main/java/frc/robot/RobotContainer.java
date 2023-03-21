@@ -99,6 +99,8 @@ public class RobotContainer {
     switch (autoModes) {
       case SHOOT_BEHIND:
         return Autos.scoreCube(drivetrainSubsystem, wristSubsystem, elevatorSubsystem, rollerClawSubsystem);
+        case SHOOT_FORWARD:
+        return Autos.scoreForward(drivetrainSubsystem, wristSubsystem, elevatorSubsystem, rollerClawSubsystem);
         case DRIVE_FORWARD:
         default:
           return Autos.driveForward(drivetrainSubsystem);
