@@ -47,9 +47,10 @@ public final class Autos {
       new ElevatorUpCommand(elevatorSubsystem),
       new MoveWristUpCommand(wristSubsystem).withTimeout(0.6),
       new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem),
-      new InstantCommand(rollerClawSubsystem::intakeRotation,rollerClawSubsystem),
+      new InstantCommand(rollerClawSubsystem::outtakeRotation,rollerClawSubsystem),
       new WaitCommand(1.5),
       new InstantCommand(rollerClawSubsystem::haltRotation,rollerClawSubsystem),
+      new MoveWristDownCommand(wristSubsystem).withTimeout(0.6),
       new ElevatorDownCommand(elevatorSubsystem)
         .alongWith(Commands.runEnd(() -> drivetrainSubsystem.drive(0.30, 0.0),
         () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
