@@ -79,7 +79,5 @@ public class ElevatorSubsystem extends SubsystemBase {
   if (getMagSwitch()){
     elevatorSpark.getEncoder().setPosition(0.0);
     }
-    System.out.println(getElevatorPos());
   }
-  
 }

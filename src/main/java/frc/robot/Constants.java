@@ -25,10 +25,11 @@ public final class Constants {
   public static final int[] ROLLER_BAR_SOLENOID = {4, 5};
   public static final int LEFT_CLAW_SPARK = 8;
   public static final int RIGHT_CLAW_SPARK = 7;
-  public static final double ROLLER_SPEED = 0.2;
+  public static final double INTAKE_ROLLER_SPEED = 0.2;
+  public static final double OUTAKE_ROLLER_SPEED = 0.5;
 
   public static final class WristConstant{
-    public static final double UPPER_LIMIT_WRIST = 24.0;
+    public static final double UPPER_LIMIT_WRIST = 22.5;
     public static final double LOWER_LIMIT_WRIST = 0.0;
     public static final int[] WRIST_BRAKE_SOLENOID = {2, 3};
     public static final int WRIST_SPARK_PORT = 6;
@@ -44,7 +45,7 @@ public final class Constants {
   
 
   public static final class ElevatorConstant {
-    public static final float UPPER_LIMIT_ELEVATOR = 40;
+    public static final float UPPER_LIMIT_ELEVATOR = 43;
     public static final double LOWER_LIMIT_ELEVATOR = 0.1;
     public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.35;
     public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = -0.35;

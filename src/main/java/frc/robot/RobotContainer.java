@@ -86,6 +86,8 @@ public class RobotContainer {
     new JoystickButton(driverControllerTwo, 4).whileTrue(new ElevatorUpCommand(elevatorSubsystem));
 
     new JoystickButton(driverControllerTwo, 2).whileTrue(new ElevatorDownCommand(elevatorSubsystem));
+
+    new JoystickButton(driverController, 1).whileTrue(new AutoBalance(drivetrainSubsystem));
   }
 
 

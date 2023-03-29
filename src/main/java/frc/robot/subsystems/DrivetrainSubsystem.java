@@ -9,7 +9,9 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,6 +26,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private CANSparkMax rightSparkTwo;
   private CANSparkMax rightSparkThree;
   private DifferentialDrive drive; 
+  private BuiltInAccelerometer accelerometer;
 
 
   public DrivetrainSubsystem() {
@@ -60,7 +63,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     drive = new DifferentialDrive(leftSparks, rightSparks);
 
-
+    accelerometer = new BuiltInAccelerometer();
 
   }
 
@@ -68,8 +71,18 @@ public class DrivetrainSubsystem extends SubsystemBase {
     drive.curvatureDrive(leftPower, rightPower,true);
   }
 
+  public double getPitch(){
+    return Math.atan2((-accelerometer.getX()), 
+    Math.sqrt(accelerometer.getY() * accelerometer.getY() + accelerometer.getZ()
+     * accelerometer.getZ())) * 57.3;
+  }
+  public double getRoll(){
+    return Math.atan2(accelerometer.getY(), accelerometer.getZ()) * 57.3;
+  }
+
   @Override
   public void periodic() {
+    System.out.println(accelerometer.getZ());
     // This method will be called once per scheduler run
   }
 }
