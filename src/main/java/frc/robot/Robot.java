@@ -25,7 +25,9 @@ public class Robot extends TimedRobot {
   public enum AutoModes {
     DRIVE_FORWARD,
     SHOOT_BEHIND,
-    SHOOT_FORWARD
+    SHOOT_FORWARD,
+    SCORE_ONLY,
+    COMPLEX_AUTO
 
   }
 
@@ -42,9 +44,11 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     autoChooser = new SendableChooser<>();
-    autoChooser.addOption("Drive Forward", AutoModes.DRIVE_FORWARD);
-    autoChooser.addOption("Shoot Behind", AutoModes.SHOOT_BEHIND);
-    autoChooser.addOption("Shoot Forward", AutoModes.SHOOT_FORWARD);
+    autoChooser.addOption("Drive Only", AutoModes.DRIVE_FORWARD);
+    autoChooser.addOption("Score Only", AutoModes.SCORE_ONLY);
+    autoChooser.addOption("Score Behind and Drive", AutoModes.SHOOT_BEHIND);
+    autoChooser.addOption("Score and drive", AutoModes.SHOOT_FORWARD);
+    autoChooser.addOption("Complex Auto", AutoModes.COMPLEX_AUTO);
     
     selectedAutoMode = autoChooser.getSelected();
     SmartDashboard.putData(autoChooser);

@@ -28,9 +28,11 @@ public class AutoBalance extends CommandBase{
     @Override
     public void execute() {
         if (drivetrainSubsystem.getPitch() < -6.0){
+            //shouldn't this number be positive bc negative makes it drive forward and positive makes it drive backwards
             drivetrainSubsystem.drive(-0.2, 0);
         }
         else if (drivetrainSubsystem.getPitch() > 6.0){
+            //same here should be negative for left power instead of positive
             drivetrainSubsystem.drive(0.2, 0);
         }
         else {
@@ -40,6 +42,7 @@ public class AutoBalance extends CommandBase{
 
     @Override
     public boolean isFinished() {
+        //this may be making it stutter bc of the condition?
         if (timer.hasElapsed(0.5)){
             timer.reset();
             return Math.abs(drivetrainSubsystem.getPitch()) < 1.0; 
