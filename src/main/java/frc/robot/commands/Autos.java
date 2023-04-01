@@ -115,4 +115,23 @@ public final class Autos {
       new ElevatorDownCommand(elevatorSubsystem)
     );
   }
+  public static CommandBase autoBalance(DrivetrainSubsystem drivetrainSubsystem, RollerClawSubsystem rollerClawSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem ){
+    return Commands.sequence(
+    new ElevatorUpCommand(elevatorSubsystem),
+    new MoveWristUpCommand(wristSubsystem).withTimeout(0.8),
+    new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem),
+     new InstantCommand(rollerClawSubsystem::intakeRotation,rollerClawSubsystem),
+      new WaitCommand(1.5),
+      new InstantCommand(rollerClawSubsystem::haltRotation,rollerClawSubsystem),
+      new MoveWristDownCommand(wristSubsystem).withTimeout(0.8),
+      new ElevatorDownCommand(elevatorSubsystem)
+        .alongWith(Commands.runEnd(() -> drivetrainSubsystem.drive(0.37, 0.0),
+        () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
+        .withTimeout(2.2)),
+    new AutoBalance(drivetrainSubsystem),
+    new WaitCommand(5.0),
+    Commands.runOnce(() -> drivetrainSubsystem.setCoastMode(), drivetrainSubsystem)
+    );
+  }
 }
+

@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private DrivetrainSubsystem drivetrainSubsystem;
+  public DrivetrainSubsystem drivetrainSubsystem;
   private RollerClawSubsystem rollerClawSubsystem;
   private WristSubsystem wristSubsystem;
   private ElevatorSubsystem elevatorSubsystem;
@@ -87,7 +87,7 @@ public class RobotContainer {
 
     new JoystickButton(driverControllerTwo, 2).whileTrue(new ElevatorDownCommand(elevatorSubsystem));
 
-    new JoystickButton(driverController, 1).whileTrue(new AutoBalance(drivetrainSubsystem));
+    //new JoystickButton(driverController, 1).whileTrue(new AutoBalance(drivetrainSubsystem));
   }
 
 
@@ -107,6 +107,8 @@ public class RobotContainer {
         return Autos.scoreOnly(wristSubsystem, elevatorSubsystem, rollerClawSubsystem);
       case COMPLEX_AUTO:
         return Autos.complexAuto(drivetrainSubsystem, wristSubsystem, elevatorSubsystem, rollerClawSubsystem);
+      case AUTO_BALANCE:
+        return Autos.autoBalance(drivetrainSubsystem, rollerClawSubsystem, wristSubsystem, elevatorSubsystem);
       case DRIVE_FORWARD:
         default:
           return Autos.driveForward(drivetrainSubsystem);

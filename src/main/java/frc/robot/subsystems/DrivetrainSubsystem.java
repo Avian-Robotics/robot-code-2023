@@ -4,18 +4,23 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 
 public class DrivetrainSubsystem extends SubsystemBase {
   /** Creates a new DrivetrainSubsystem. */
@@ -26,10 +31,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private CANSparkMax rightSparkTwo;
   private CANSparkMax rightSparkThree;
   private DifferentialDrive drive; 
-  private BuiltInAccelerometer accelerometer;
+  private AHRS gyro;  
 
 
   public DrivetrainSubsystem() {
+
+
     leftSparkOne = new CANSparkMax(Constants.LEFT_SPARK_ONE_PORT, MotorType.kBrushed);
     leftSparkTwo = new CANSparkMax(Constants.LEFT_SPARK_TWO_PORT, MotorType.kBrushed);
     leftSparkThree = new CANSparkMax(Constants.LEFT_SPARK_THREE_PORT, MotorType.kBrushed);
@@ -51,6 +58,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     rightSparkTwo.setSmartCurrentLimit(40);
     rightSparkThree.setSmartCurrentLimit(40);
 
+    setCoastMode();
+
     rightSparkOne.burnFlash();
     rightSparkTwo.burnFlash();
     rightSparkThree.burnFlash();
@@ -63,22 +72,44 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     drive = new DifferentialDrive(leftSparks, rightSparks);
 
-    accelerometer = new BuiltInAccelerometer();
-
+    gyro = new AHRS(Port.kUSB);
   }
 
   public void drive(double leftPower, double rightPower){
     drive.curvatureDrive(leftPower, rightPower,true);
   }
 
-  public double getPitch(){
-    return Math.atan2((-accelerometer.getX()), 
-    Math.sqrt(accelerometer.getY() * accelerometer.getY() + accelerometer.getZ()
-     * accelerometer.getZ())) * 57.3;
+  // public double getPitch(){
+  //   return Math.atan2((-accelerometer.getX()), 
+  //   Math.sqrt(accelerometer.getY() * accelerometer.getY() + accelerometer.getZ()
+  //    * accelerometer.getZ())) * 57.3;
+  // }
+  // public double getRoll(){
+  //   return Math.atan2(accelerometer.getY(), accelerometer.getZ()) * 57.3;
+  // }
+
+  public void setCoastMode() {
+    leftSparkOne.setIdleMode(IdleMode.kCoast);
+    leftSparkTwo.setIdleMode(IdleMode.kCoast);
+    leftSparkThree.setIdleMode(IdleMode.kCoast);
+    rightSparkOne.setIdleMode(IdleMode.kCoast);
+    rightSparkTwo.setIdleMode(IdleMode.kCoast);
+    rightSparkThree.setIdleMode(IdleMode.kCoast);
   }
-  public double getRoll(){
-    return Math.atan2(accelerometer.getY(), accelerometer.getZ()) * 57.3;
+
+  public void setBrakeMode() {
+    leftSparkOne.setIdleMode(IdleMode.kBrake);
+    leftSparkTwo.setIdleMode(IdleMode.kBrake);
+    leftSparkThree.setIdleMode(IdleMode.kBrake);
+    rightSparkOne.setIdleMode(IdleMode.kBrake);
+    rightSparkTwo.setIdleMode(IdleMode.kBrake);
+    rightSparkThree.setIdleMode(IdleMode.kBrake);
   }
+
+  public double getPitch() {
+    return gyro.getRoll() - 2.6;
+}
+
 
   @Override
   public void periodic() {

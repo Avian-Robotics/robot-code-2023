@@ -29,7 +29,7 @@ public final class Constants {
   public static final double OUTAKE_ROLLER_SPEED = 0.5;
 
   public static final class WristConstant{
-    public static final double UPPER_LIMIT_WRIST = 22.5;
+    public static final double UPPER_LIMIT_WRIST = 23;
     public static final double LOWER_LIMIT_WRIST = 0.0;
     public static final int[] WRIST_BRAKE_SOLENOID = {2, 3};
     public static final int WRIST_SPARK_PORT = 6;
@@ -58,6 +58,14 @@ public final class Constants {
     public static final double LEVEL_ONE = 0;
     }
   public static final int ELEVATOR_SPARK = 5;
+
+  public static final class AutoConstants{
+    public static final double PITCH_P = 0;
+    public static final double PITCH_I = 0;
+    public static final double PITCH_D = 0;
+    public static final double PITCH_TOLERANCE = 0;
+    public static final double PITCH_SET_POINT = 0;
+  }
 
 
 }
