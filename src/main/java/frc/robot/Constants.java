@@ -22,6 +22,8 @@ public final class Constants {
   public static final int RIGHT_SPARK_TWO_PORT = 2;
   public static final int RIGHT_SPARK_THREE_PORT = 9;
 
+  public static final double DRIVE_SPEED_COEFFICIENT = 0.5;
+
   public static final int[] ROLLER_BAR_SOLENOID = {4, 5};
   public static final int LEFT_CLAW_SPARK = 8;
   public static final int RIGHT_CLAW_SPARK = 7;

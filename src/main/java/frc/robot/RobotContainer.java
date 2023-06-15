@@ -46,7 +46,7 @@ public class RobotContainer {
     drivetrainSubsystem = new DrivetrainSubsystem();
     rollerClawSubsystem = new RollerClawSubsystem();
     elevatorSubsystem = new ElevatorSubsystem();
-    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(driverController.getRawAxis(1), driverController.getRawAxis(2)), drivetrainSubsystem));
+    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(Constants.DRIVE_SPEED_COEFFICIENT * driverController.getRawAxis(1), Constants.DRIVE_SPEED_COEFFICIENT * driverController.getRawAxis(2)), drivetrainSubsystem));
     wristSubsystem = new WristSubsystem();
 
     configureBindings();
