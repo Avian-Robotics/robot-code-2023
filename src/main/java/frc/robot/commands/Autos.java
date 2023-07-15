@@ -19,6 +19,7 @@ public final class Autos {
 
 //Drive only, backup, then go forward
   public static CommandBase driveForward(DrivetrainSubsystem drivetrainSubsystem){
+    /*
     return Commands.runEnd(() -> drivetrainSubsystem.drive(0.50, 0.0),
     () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
     .withTimeout(3)
@@ -27,6 +28,10 @@ public final class Autos {
        () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
        .withTimeout(1.25)
        );
+       */
+      return Commands.runEnd(() -> drivetrainSubsystem.drive(-0.4, 0.0),
+      () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem) 
+      .withTimeout(1.25);
   }
   //Will score backwards
   public static CommandBase scoreCube(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
@@ -34,7 +39,7 @@ public final class Autos {
       new ElevatorUpCommand(elevatorSubsystem),
       new MoveWristUpCommand(wristSubsystem).withTimeout(0.35),
       new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem),
-      new InstantCommand(rollerClawSubsystem::fastRotation,rollerClawSubsystem),
+      new InstantCommand(rollerClawSubsystem::intakeRotation,rollerClawSubsystem),
       new WaitCommand(1.5),
       new InstantCommand(rollerClawSubsystem::haltRotation,rollerClawSubsystem),
       new ElevatorDownCommand(elevatorSubsystem)
@@ -116,18 +121,18 @@ public final class Autos {
     );
   }
   public static CommandBase autoBalance(DrivetrainSubsystem drivetrainSubsystem, RollerClawSubsystem rollerClawSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem ){
-    return Commands.sequence(
+    return Commands.sequence(/*
     new ElevatorUpCommand(elevatorSubsystem),
-    new MoveWristUpCommand(wristSubsystem).withTimeout(0.8),
+    new MoveWristUpCommand(wristSubsystem).withTimeout(1.0),
     new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem),
      new InstantCommand(rollerClawSubsystem::intakeRotation,rollerClawSubsystem),
       new WaitCommand(1.5),
       new InstantCommand(rollerClawSubsystem::haltRotation,rollerClawSubsystem),
-      new MoveWristDownCommand(wristSubsystem).withTimeout(0.8),
+      new MoveWristDownCommand(wristSubsystem).withTimeout(1.2),
       new ElevatorDownCommand(elevatorSubsystem)
         .alongWith(Commands.runEnd(() -> drivetrainSubsystem.drive(0.37, 0.0),
         () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
-        .withTimeout(2.2)),
+        .withTimeout(2.2)), */
     new AutoBalance(drivetrainSubsystem),
     new WaitCommand(5.0),
     Commands.runOnce(() -> drivetrainSubsystem.setCoastMode(), drivetrainSubsystem)

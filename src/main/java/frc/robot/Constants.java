@@ -22,7 +22,7 @@ public final class Constants {
   public static final int RIGHT_SPARK_TWO_PORT = 2;
   public static final int RIGHT_SPARK_THREE_PORT = 9;
 
-  public static final double DRIVE_SPEED_COEFFICIENT = 0.5;
+  public static final double DRIVE_SPEED_COEFFICIENT = 1;
 
   public static final int[] ROLLER_BAR_SOLENOID = {4, 5};
   public static final int LEFT_CLAW_SPARK = 8;
@@ -47,7 +47,7 @@ public final class Constants {
   
 
   public static final class ElevatorConstant {
-    public static final float UPPER_LIMIT_ELEVATOR = 43;
+    public static final float UPPER_LIMIT_ELEVATOR = 37; // TODO: Change back to 43
     public static final double LOWER_LIMIT_ELEVATOR = 0.1;
     public static final double ELEVATOR_MOVEMENT_SPEED_UP = 0.35;
     public static final double ELEVATOR_MOVEMENT_SPEED_DOWN = -0.35;
