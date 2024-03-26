@@ -4,11 +4,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 
-public class MoveElevatorCommand extends CommandBase {
+public class MoveElevatorCommand extends Command {
   /** Creates a new MoveElevator. */
   private final ElevatorSubsystem elevatorSubsystem;
   private final double position;
