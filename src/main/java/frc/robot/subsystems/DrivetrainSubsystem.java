@@ -48,12 +48,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
     leftSparkTwo.setInverted(false);
     leftSparkThree.setInverted(false);
 
-    leftSparkOne.setSmartCurrentLimit(35);
-    leftSparkTwo.setSmartCurrentLimit(35);
-    leftSparkThree.setSmartCurrentLimit(35);
-    rightSparkOne.setSmartCurrentLimit(35);
-    rightSparkTwo.setSmartCurrentLimit(35);
-    rightSparkThree.setSmartCurrentLimit(35);
+    leftSparkOne.setSmartCurrentLimit(40);
+    leftSparkTwo.setSmartCurrentLimit(40);
+    leftSparkThree.setSmartCurrentLimit(40);
+    rightSparkOne.setSmartCurrentLimit(40);
+    rightSparkTwo.setSmartCurrentLimit(40);
+    rightSparkThree.setSmartCurrentLimit(40);
 
     setCoastMode();
 
