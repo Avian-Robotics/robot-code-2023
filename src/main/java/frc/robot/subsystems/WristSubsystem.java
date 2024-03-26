@@ -5,10 +5,9 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -33,11 +32,11 @@ public class WristSubsystem extends SubsystemBase {
 
     pidController = new PIDController(Constants.WristConstant.P, Constants.WristConstant.I, Constants.WristConstant.D);
     pidController.setTolerance(4);
-    wristSpark.setPeriodicFramePeriod(CANSparkMaxLowLevel.PeriodicFrame.kStatus0, 20);
-    wristSpark.setPeriodicFramePeriod(CANSparkMaxLowLevel.PeriodicFrame.kStatus1, 60);
-    wristSpark.setPeriodicFramePeriod(CANSparkMaxLowLevel.PeriodicFrame.kStatus2, 60);
-    wristSpark.setPeriodicFramePeriod(CANSparkMaxLowLevel.PeriodicFrame.kStatus3, 120);
-    wristSpark.setPeriodicFramePeriod(CANSparkMaxLowLevel.PeriodicFrame.kStatus4, 120);
+    wristSpark.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
+    wristSpark.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 60);
+    wristSpark.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 60);
+    wristSpark.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 120);
+    wristSpark.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 120);
   }
 
   public void moveWristPid() {

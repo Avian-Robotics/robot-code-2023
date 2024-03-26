@@ -6,10 +6,10 @@ package frc.robot.commands;
 
 import javax.swing.text.Position;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.WristSubsystem;
 
-public class MoveWristCommand extends CommandBase {
+public class MoveWristCommand extends Command {
   /** Creates a new MoveWristCommand. */
   private final WristSubsystem wristSubsystem;
   private final double mainPosition;

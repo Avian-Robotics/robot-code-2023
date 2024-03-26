@@ -6,10 +6,10 @@ import java.sql.Time;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class AutoBalance extends CommandBase{
+public class AutoBalance extends Command{
     private final DrivetrainSubsystem drivetrainSubsystem;
     private final Timer timer = new Timer();
 
