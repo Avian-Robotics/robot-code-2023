@@ -5,17 +5,15 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkBase.IdleMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -66,10 +64,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
     leftSparkTwo.burnFlash();
     leftSparkThree.burnFlash();
 
-    MotorControllerGroup leftSparks = new MotorControllerGroup(leftSparkOne, leftSparkTwo, leftSparkThree);
-    MotorControllerGroup rightSparks = new MotorControllerGroup(rightSparkOne, rightSparkTwo, rightSparkThree);
+    leftSparkTwo.follow(leftSparkOne);
+    leftSparkThree.follow(leftSparkOne);
+    rightSparkTwo.follow(rightSparkOne);
+    rightSparkThree.follow(rightSparkOne);
 
-    drive = new DifferentialDrive(leftSparks, rightSparks);
+
+    drive = new DifferentialDrive(leftSparkOne, rightSparkOne);
 
     gyro = new AHRS(Port.kUSB);
   }
@@ -77,15 +78,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void drive(double leftPower, double rightPower){
     drive.curvatureDrive(leftPower, rightPower,true);
   }
-
-  // public double getPitch(){
-  //   return Math.atan2((-accelerometer.getX()), 
-  //   Math.sqrt(accelerometer.getY() * accelerometer.getY() + accelerometer.getZ()
-  //    * accelerometer.getZ())) * 57.3;
-  // }
-  // public double getRoll(){
-  //   return Math.atan2(accelerometer.getY(), accelerometer.getZ()) * 57.3;
-  // }
 
   public void setCoastMode() {
     leftSparkOne.setIdleMode(IdleMode.kCoast);
@@ -112,7 +104,5 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //System.out.println(accelerometer.getZ());
-    // This method will be called once per scheduler run
   }
 }

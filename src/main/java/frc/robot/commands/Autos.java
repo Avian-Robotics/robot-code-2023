@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -18,8 +18,7 @@ public final class Autos {
   /** Example static factory for an autonomous command. */
 
 //Drive only, backup, then go forward
-  public static CommandBase driveForward(DrivetrainSubsystem drivetrainSubsystem){
-    /*
+  public static Command driveForward(DrivetrainSubsystem drivetrainSubsystem){
     return Commands.runEnd(() -> drivetrainSubsystem.drive(0.50, 0.0),
     () -> drivetrainSubsystem.drive(0, 0.0), drivetrainSubsystem)
     .withTimeout(3)
@@ -34,7 +33,7 @@ public final class Autos {
       .withTimeout(1.25);
   }
   //Will score backwards
-  public static CommandBase scoreCube(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
+  public static Command scoreCube(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
     return Commands.sequence(
       new ElevatorUpCommand(elevatorSubsystem),
       new MoveWristUpCommand(wristSubsystem).withTimeout(0.35),
@@ -50,7 +49,7 @@ public final class Autos {
   }
 
   //Will only score on lvl 3
-  public static CommandBase scoreOnly(WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
+  public static Command scoreOnly(WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
     return Commands.sequence(
       new ElevatorUpCommand(elevatorSubsystem),
       new MoveWristUpCommand(wristSubsystem).withTimeout(0.8),
@@ -63,7 +62,7 @@ public final class Autos {
   }
 
   //Will score lvl 3 and drive out of community
-  public static CommandBase scoreForward(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
+  public static Command scoreForward(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
     return Commands.sequence(
       new ElevatorUpCommand(elevatorSubsystem),
       new MoveWristUpCommand(wristSubsystem).withTimeout(0.95),
@@ -80,7 +79,7 @@ public final class Autos {
   }
   
   //Auto that will score lvl 3 and score lvl 2
-  public static CommandBase complexAuto(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
+  public static Command complexAuto(DrivetrainSubsystem drivetrainSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem, RollerClawSubsystem rollerClawSubsystem){
     return Commands.sequence(
       //score on level 3
       new ElevatorUpCommand(elevatorSubsystem),
@@ -120,8 +119,9 @@ public final class Autos {
       new ElevatorDownCommand(elevatorSubsystem)
     );
   }
-  public static CommandBase autoBalance(DrivetrainSubsystem drivetrainSubsystem, RollerClawSubsystem rollerClawSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem ){
-    return Commands.sequence(/*
+  
+  public static Command autoBalance(DrivetrainSubsystem drivetrainSubsystem, RollerClawSubsystem rollerClawSubsystem, WristSubsystem wristSubsystem, ElevatorSubsystem elevatorSubsystem ){
+    return Commands.sequence(
     new ElevatorUpCommand(elevatorSubsystem),
     new MoveWristUpCommand(wristSubsystem).withTimeout(1.0),
     new InstantCommand(rollerClawSubsystem::closeClaw, rollerClawSubsystem),
